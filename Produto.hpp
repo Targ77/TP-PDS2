@@ -1,6 +1,6 @@
 #ifndef PRODUTO_HPP
 #define PRODUTO_HPP
-#pragma once
+
 #include "string"
 #include <stdbool.h>
 
@@ -8,7 +8,8 @@
 class Produto {
 protected:
     int codigo;
-    bool hasAlugado = false;
+    int quantidadeEstoque;
+    int quantidadeDisponivel;
     std::string titulo;
 
 public:

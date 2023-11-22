@@ -1,17 +1,14 @@
-#ifndef FITACASSETE_HPP
-#define FITACASSETE_HPP
-#pragma once
-#include "Produto.hpp"
-#include "string";
+#ifndef FITA_HPP
+#define FITA_HPP
 
-class FitaCassete : public Produto {
+#include "Produto.hpp"
+#include "string"
+
+class Fita : public Produto {
 public:
-    FitaCassete(int codigo, const std::string& titulo);
+    Fita(int codigo, int quantidade, const std::string& titulo);
     double calcularPreco(int diasLocacao) const override;
     void imprimir() const override;
     int getCodigo() const override;
-
-private:
-    bool rebobinada;
 };
 #endif

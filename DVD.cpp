@@ -1,9 +1,11 @@
 #include <iostream>
 #include "DVD.hpp"
 
-DVD::DVD(int codigo, const std::string& titulo, Categoria categoria) {
+DVD::DVD(int codigo, int quantidade, const std::string& titulo, Categoria categoria) {
     this->codigo = codigo;
     this->titulo = titulo;
+    this->quantidadeDisponivel = quantidade;
+    this->quantidadeEstoque = quantidade;
     this->categoria = categoria;
 }
 
@@ -26,7 +28,8 @@ double DVD::calcularPreco(int diasLocacao) const {
 }
 
 void DVD::imprimir() const {
-    std::cout << "Titulo: " << titulo << ", Categoria: ";
+    std::cout << "Titulo: " << titulo << std::endl;
+    std::cout << "Codigo: " << getCodigo() << ", Quantidade: " << this->quantidadeDisponivel << ", Categoria: ";
 
     switch (categoria) {
     case Lancamento:
