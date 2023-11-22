@@ -5,37 +5,60 @@
 #include <fstream>
 #include <sstream>
 
-void Estoque::adicionarProduto(std::unique_ptr<Produto> produto) {
-    produtos[produto->getCodigo()] = std::move(produto);
+void Estoque::adicionarFita(int codigo, int quantidade, const std::string& titulo) {
+
+    auto it = produtos.find(codigo);
+    if (it == produtos.end()) {
+        produtos[codigo] = new Fita(codigo, quantidade, titulo);
+    }else{
+        std::cout << "Produto com codigo " << codigo << " já existe." << std::endl;
+    }
+}
+
+void Estoque::adicionarDVD(int codigo, int quantidade, const std::string& titulo, const std::string& categoria) {
+
+    auto it = produtos.find(codigo);
+    if (it == produtos.end()) {
+        produtos[codigo] = new DVD(codigo, quantidade, titulo, categoria);
+    }else{
+        std::cout << "Produto com codigo " << codigo << " já existe." << std::endl;
+    }
 }
 
 void Estoque::removerProduto(int codigo) {
-    produtos.erase(codigo);
+    auto it = produtos.find(codigo);
+
+    if (it != produtos.end()) {
+        produtos.erase(it);
+        std::cout << "Produto com codigo " << codigo << " removido com sucesso." << std::endl;
+    } else {
+        std::cout << "Produto com codigo " << codigo << " não encontrado." << std::endl;
+    }
 }
 
 Produto* Estoque::buscarProduto(int codigo) {
     auto it = produtos.find(codigo);
     if (it != produtos.end()) {
-        return it->second.get();
+        return it->second;
     }
     return nullptr;
 }
 
 void Estoque::imprimirRelatorio() const {
-    for (const auto& pair : produtos) {
-        std::cout << "Codigo: " << pair.first << ", ";
-        pair.second->imprimir();
-    }
-}
 
-int Estoque::quantidadeTitulo(const std::string& titulo){
-    int quant = 0;
-    for (const auto& elemento : produtos) {
-        if (elemento.second->getTitulo() == titulo) {
-            quant++;
+    if(!this->produtos.empty()){
+        std::cout << "Relatorio de estoque:" << std::endl;
+        std::cout << std::endl;
+
+        for (const auto& pair : produtos) {
+
+            pair.second->imprimir();
         }
+
+    }else{
+        std::cout << "Estoque Vazio!!" << std::endl;
     }
-    return quant;
+
 }
 
 void Estoque::lerArquivoCadastro(const std::string& nomeArquivo) {
@@ -47,7 +70,6 @@ void Estoque::lerArquivoCadastro(const std::string& nomeArquivo) {
     }
 
     std::string linha;
-    int numProdutosCadastrados = 0;
 
     while (std::getline(arquivo, linha)) {
         std::istringstream iss(linha);
@@ -56,38 +78,20 @@ void Estoque::lerArquivoCadastro(const std::string& nomeArquivo) {
 
         if (comando == "CF") {
             char tipo;
-            int codigo, categoria;
-            std::string titulo;
+            int codigo, quantidade;
+            std::string titulo, categoria;
 
-            iss >> tipo >> codigo >> titulo;
+            iss >> tipo >> quantidade >> codigo >> titulo;
 
             if (tipo == 'F') {
-                // Filme
-                std::unique_ptr<Produto> fita = std::make_unique<Fita>(codigo, titulo);
-                adicionarProduto(std::move(fita));
-                numProdutosCadastrados++;
+
+                adicionarFita(codigo, quantidade, titulo);
                 std::cout << "Fita " << codigo << " cadastrado com sucesso" << std::endl;
             }
             else if (tipo == 'D') {
-                // DVD
+
                 iss >> categoria;
-                DVD::Categoria categoriaConstrutor;
-
-                switch (categoria) {
-                case 1:
-                    categoriaConstrutor = DVD::Lancamento;
-                    break;
-                case 2:
-                    categoriaConstrutor = DVD::Estoque;
-                    break;
-                case 3:
-                    categoriaConstrutor = DVD::Promocao;
-                    break;
-                }
-
-                std::unique_ptr<Produto> dvd = std::make_unique<DVD>(codigo, titulo, categoriaConstrutor);
-                adicionarProduto(std::move(dvd));
-                numProdutosCadastrados++;
+                adicionarDVD(codigo, quantidade, titulo, categoria);
                 std::cout << "DVD " << codigo << " cadastrado com sucesso" << std::endl;
             }
             else {
@@ -99,7 +103,8 @@ void Estoque::lerArquivoCadastro(const std::string& nomeArquivo) {
         }
     }
 
+    std::cout << std::endl;
+
     arquivo.close();
 
-    std::cout << "[" << numProdutosCadastrados << "] Filmes cadastrados com sucesso" << std::endl;
 }

@@ -6,14 +6,16 @@
 #include <memory>
 
 class Estoque {
+private:
+    std::map<int, Produto*> produtos;
+
 public:
-    void adicionarProduto(std::unique_ptr<Produto> produto );
+    void adicionarFita(int codigo, int quantidade, const std::string& titulo);
+    void adicionarDVD(int codigo, int quantidade, const std::string& titulo, const std::string& categoria);
     void removerProduto(int codigo);
     Produto* buscarProduto(int codigo);
     void imprimirRelatorio() const;
     int quantidadeTitulo(const std::string& titulo);
     void lerArquivoCadastro(const std::string& nomeArquivo);
-private:
-    std::map<int, std::unique_ptr<Produto>> produtos;
 };
 #endif
