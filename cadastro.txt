@@ -1,0 +1,8 @@
+CF F 11 1 Filme1
+CF D 10 2 Filme2 lancamento
+CF F 12 3 Filme3
+CF D 13 4 Filme4 Lancamento
+CF F 14 5 Filme5
+CF D 12 6 Filme6 promocao
+CF F 15 7 Filme7
+CF D 12 8 Filme8 Estoque
