@@ -10,7 +10,7 @@ void Estoque::adicionarFita(int codigo, int quantidade, const std::string& titul
     auto it = produtos.find(codigo);
     if (it == produtos.end()) {
         produtos[codigo] = new Fita(codigo, quantidade, titulo);
-    }else{
+    } else{
         std::cout << "Produto com codigo " << codigo << " já existe." << std::endl;
     }
 }
@@ -20,7 +20,7 @@ void Estoque::adicionarDVD(int codigo, int quantidade, const std::string& titulo
     auto it = produtos.find(codigo);
     if (it == produtos.end()) {
         produtos[codigo] = new DVD(codigo, quantidade, titulo, categoria);
-    }else{
+    } else{
         std::cout << "Produto com codigo " << codigo << " já existe." << std::endl;
     }
 }
@@ -87,20 +87,19 @@ void Estoque::lerArquivoCadastro(const std::string& nomeArquivo) {
 
                 adicionarFita(codigo, quantidade, titulo);
                 std::cout << "Fita " << codigo << " cadastrado com sucesso" << std::endl;
-            }
-            else if (tipo == 'D') {
+            }else if (tipo == 'D') {
 
                 iss >> categoria;
                 adicionarDVD(codigo, quantidade, titulo, categoria);
                 std::cout << "DVD " << codigo << " cadastrado com sucesso" << std::endl;
-            }
-            else {
+            }else {
                 std::cout << "ERRO: dados incorretos" << std::endl;
             }
-        }
-        else {
+            
+        }else {
             std::cout << "ERRO: comando desconhecido" << std::endl;
         }
+        
     }
 
     std::cout << std::endl;
