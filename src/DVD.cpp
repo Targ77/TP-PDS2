@@ -1,12 +1,13 @@
 #include <iostream>
 #include "DVD.hpp"
+#include <algorithm>
 
-DVD::DVD(int codigo, int quantidade, const std::string& titulo, Categoria categoria) {
+DVD::DVD(int codigo, int quantidade, const std::string& titulo, const std::string& categoria) {
     this->codigo = codigo;
     this->titulo = titulo;
     this->quantidadeDisponivel = quantidade;
     this->quantidadeEstoque = quantidade;
-    this->categoria = categoria;
+    this->categoria = getCategoria(categoria);
 }
 
 double DVD::calcularPreco(int diasLocacao) const {
@@ -43,8 +44,25 @@ void DVD::imprimir() const {
         break;
     }
     std::cout << std::endl;
+    std::cout << "---------------" << std::endl;
 }
 
 int DVD::getCodigo() const {
     return this->codigo;
+}
+
+DVD::Categoria DVD::getCategoria(const std::string& categoria) {
+    std::string categoriaLowerCase = categoria;
+    std::transform(categoriaLowerCase.begin(), categoriaLowerCase.end(), categoriaLowerCase.begin(), ::tolower);
+
+    if (categoriaLowerCase == "lancamento") {
+        return Categoria::Lancamento;
+    } else if (categoriaLowerCase == "estoque") {
+        return Categoria::Estoque;
+    } else if (categoriaLowerCase == "promocao") {
+        return Categoria::Promocao;
+    } else {
+
+        throw std::invalid_argument("Categoria invalida: " + categoria);
+    }
 }

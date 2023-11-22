@@ -16,6 +16,7 @@ double Fita::calcularPreco(int diasLocacao) const {
 void Fita::imprimir() const {
     std::cout << "Titulo: " << titulo << std::endl;
     std::cout << "Codigo: " << getCodigo() << ", Quantidade: " << this->quantidadeDisponivel << std::endl;
+    std::cout << "---------------" << std::endl;
 }
 
 int Fita::getCodigo() const {
