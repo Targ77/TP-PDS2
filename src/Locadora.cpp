@@ -49,8 +49,9 @@ void Locadora::alugarFilme(const std::string& cpf, std::vector<int> filmesAlugad
     if(controleCliente.validaCliente(cpf)){
 
         for (int filme : filmesAlugados) {
-            if(estoque.validaProduto(filme)){
+            if(estoque.validaProdutoLocacao(filme)){
                 controleCliente.alugarFilme(cpf, filme);
+                estoque.alugaProduto(filme);
             }else{
                 filmesIndeisponiveis.push_back(filme);
             }
@@ -61,10 +62,24 @@ void Locadora::alugarFilme(const std::string& cpf, std::vector<int> filmesAlugad
         for (int filme : filmesIndeisponiveis) {
             std::cout << filme << " ";
         }
+        std::cout << std::endl;
+    }else{
+        std::cout << "Todos Produtos alugados. " << std::endl;
     }
 
 }
 
 void Locadora::devolverFilme(const std::string& cpf, int diasLocacao) {
-    // Implemente a lógica para devolver um filme
+    double valorTotal = 0;
+    if(controleCliente.validaCliente(cpf)){
+        Cliente* cliente = controleCliente.encontrarCliente(cpf);
+
+        for (int filme : cliente->getFilmes()) {
+            if(estoque.validaProdutoLocacao(filme)){
+               valorTotal = valorTotal + estoque.devolveLocacao(filme, diasLocacao);
+            }
+        }
+        cliente->devolverFilmes();
+        std::cout << " Valor Total: " << valorTotal << std::endl;
+    }
 }

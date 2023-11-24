@@ -47,7 +47,7 @@ void ControleCliente::alugarFilme(const std::string& cpf, int codigo){
     if (it != clientes.end()) {
         it->second->addFilme(codigo);
     } else {
-        std::cout << "Cliente com CPF " << cpf << " não encontrado." << std::endl;
+        std::cout << "Cliente com CPF " << cpf << " nao encontrado." << std::endl;
     }
 }
 
@@ -57,7 +57,7 @@ void ControleCliente::devolverFilmes(const std::string& cpf){
     if (it != clientes.end()) {
         it->second->devolverFilmes();
     } else {
-        std::cout << "Cliente com CPF " << cpf << " não encontrado." << std::endl;
+        std::cout << "Cliente com CPF " << cpf << " nao encontrado." << std::endl;
     }
 }
 

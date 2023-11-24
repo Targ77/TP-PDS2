@@ -21,11 +21,14 @@ double DVD::calcularPreco(int diasLocacao) const {
         precoBase = 10.0;
         break;
     case Promocao:
+        std::cout << "Codigo: " << getCodigo() << " | Valor: 10" << std::endl;
         return 10.0;
         break;
     }
 
-    return precoBase * diasLocacao;
+    double valor = precoBase * diasLocacao;
+    std::cout << "Codigo: " << getCodigo() << " | Valor: " << valor << std::endl;
+    return valor;
 }
 
 void DVD::imprimir() const {

@@ -5,50 +5,150 @@
 #include "ControleCliente.hpp"
 #include "Cliente.hpp"
 #include "Locadora.hpp"
+#include <fstream>
+#include <sstream>
+
+void imprimirInstrucoesEntrada() {
+    std::cout << "Bem-Vindo a Nossa Locadora" << std::endl;
+    std::cout << std::endl;
+    std::cout << "Instrucoes de Entrada:" << std::endl;
+    
+    std::cout << "1. Ler Arquivo de Cadastro:" << std::endl;
+    std::cout << "   LA <Nome do Arquivo>" << std::endl;
+
+    std::cout << "2. Cadastrar Filme:" << std::endl;
+    std::cout << "   CF <Tipo: F|D> <quantidade> <codigo> <titulo> <categoria no caso de DVD>" << std::endl;
+
+    std::cout << "3. Remover Filme:" << std::endl;
+    std::cout << "   RF <codigo>" << std::endl;
+
+    std::cout << "4. Listar Filmes ordenados por Codigo ou Titulo:" << std::endl;
+    std::cout << "   LF [C|T]" << std::endl;
+
+    std::cout << "5. Cadastrar Cliente:" << std::endl;
+    std::cout << "   CC <CPF> <Nome>" << std::endl;
+
+    std::cout << "6. Remover Cliente:" << std::endl;
+    std::cout << "   RC <CPF>" << std::endl;
+
+    std::cout << "7. Listar Clientes ordenados por Codigo ou Nome:" << std::endl;
+    std::cout << "   LC [C|N]" << std::endl;
+
+    std::cout << "8. Aluguel Filme:" << std::endl;
+    std::cout << "   AL <CPF> <Codigo1> … <Codigo N>" << std::endl;
+
+    std::cout << "9. Devolucao Filme:" << std::endl;
+    std::cout << "   DV <CPF> <Dias Locacao>" << std::endl;
+
+    std::cout << "10. Finalizar Sistema:" << std::endl;
+    std::cout << "    FS" << std::endl;
+}
 
 int main() {
+    Locadora locadora;
 
-    Locadora locadora;  // Crie uma instância direta de Locadora
-    locadora.lerArquivoCadastro("cadastro.txt");
-    locadora.listarProdutosOrdenadosPorCodigo();
+    std::string comando;
+    imprimirInstrucoesEntrada();
 
-    locadora.cadastrarCliente("55768302644", "Thiago Alves");
-    locadora.cadastrarCliente("13768302644", "Caio");
-    locadora.cadastrarCliente("03768302644", "Helena");
-    std::cout << "------------------------" << std::endl;
-    std::vector<int> filmesAlugados = {3, 4, 5};
-    std::vector<int> filmesAlugados2 = {1, 2};
-    std::vector<int> filmesAlugados3 = {7, 8, 10};
-    locadora.alugarFilme("55768302644", filmesAlugados);
-    locadora.alugarFilme("13768302644", filmesAlugados2);
-    locadora.alugarFilme("03768302644", filmesAlugados3);
-    std::cout << "------------------------" << std::endl;
-    locadora.listarClientesOrdenadosPorCpf();
+    while (true) {
+        std::cout << "Digite um comando (ou 'FS' para finalizar): ";
+        std::getline(std::cin, comando);
 
-    /*controle.adicionarCliente("55768302644", "Thiago Alves");
-    controle.adicionarCliente("13768302644", "Lucas Alves");
-    controle.adicionarCliente("03768302644", "Manu");
+        std::istringstream iss(comando);
+        std::string operacao;
+        iss >> operacao;
 
-    controle.encontrarCliente("13768302644");
-    controle.imprimirRelatorio();
-    controle.removerCliente("13768302644");
+        if (operacao == "LA") {
+            std::string nomeArquivo;
+            iss >> nomeArquivo;
+            // Lógica para Ler Arquivo de Cadastro
+            locadora.lerArquivoCadastro(nomeArquivo);
 
-    controle.alugarFilme("55768302644", 1);
-    controle.alugarFilme("55768302644", 66);
-    controle.alugarFilme("55768302644", 3);
-    controle.imprimirRelatorio();
+        } else if (operacao == "CF") {
+            char tipo;
+            int quantidade, codigo;
+            std::string titulo, categoria;
+            // Lógica para Cadastrar Filme
+            iss >> tipo >> quantidade >> codigo >> titulo;
+            if (tipo == 'D') {
+                iss >> categoria;
+                locadora.cadastrarDVD(codigo, quantidade, titulo, categoria);
+            } else if (tipo == 'F') {
+                locadora.cadastrarFita(codigo, quantidade, titulo);
+            } else {
+                std::cerr << "ERRO: Tipo de filme inválido." << std::endl;
+            }
 
+        } else if (operacao == "RF") {
+            int codigo;
+            iss >> codigo;
+            // Lógica para Remover Filme
+            locadora.removerProduto(codigo);
 
-    estoque.adicionarDVD(1, 10, "Meu DVD", "lancamento");
-    estoque.adicionarFita(2, 10, "Minha Fita");
-    estoque.lerArquivoCadastro("cadastro.txt");
-    estoque.imprimirRelatorio();
+        } else if (operacao == "LF") {
+            char opcao;
+            iss >> opcao;
+            // Lógica para Listar Filmes
+            if (opcao == 'C') {
+                locadora.listarProdutosOrdenadosPorCodigo();
+            } else if (opcao == 'T') {
+                locadora.listarProdutosOrdenadosPorTitulo();//Falta Implementar
+            } else {
+                std::cerr << "ERRO: Tipo de listagem inválido." << std::endl;
+            }
 
-    estoque.removerProduto(1);
+        } else if (operacao == "CC") {
+            std::string cpf, nome;
+            iss >> cpf >> nome;
+            // Lógica para Cadastrar Cliente
+            locadora.cadastrarCliente(cpf, nome);
 
-    estoque.removerProduto(10);
+        } else if (operacao == "RC") {
+            std::string cpf;
+            iss >> cpf;
+            // Lógica para Remover Cliente
+            locadora.removerCliente(cpf);
 
-    estoque.imprimirRelatorio();*/
+        } else if (operacao == "LC") {
+            char opcao;
+            iss >> opcao;
+            // Lógica para Listar Clientes
+            if (opcao == 'C') {
+                locadora.listarClientesOrdenadosPorCpf();
+            } else if (opcao == 'T') {
+                locadora.listarClientesOrdenadosPorNome();//Falta Implementar
+            } else {
+                std::cerr << "ERRO: Tipo de listagem inválido." << std::endl;
+            }
+
+        } else if (operacao == "AL") {
+            std::string cpf;
+            iss >> cpf;
+
+            std::vector<int> codigosProdutos;
+            int codigoProduto;
+            while (iss >> codigoProduto) {
+                codigosProdutos.push_back(codigoProduto);
+            }
+
+            // Lógica para Aluguel de Filme
+            locadora.alugarFilme(cpf, codigosProdutos);
+
+        } else if (operacao == "DV") {
+            std::string cpf;
+            int dias;
+            iss >> cpf;
+            iss >> dias;
+
+            locadora.devolverFilme(cpf, dias);
+
+        } else if (operacao == "FS") {
+            std::cout << "Sistema finalizado." << std::endl;
+            break;
+        } else {
+            std::cerr << "Comando inválido." << std::endl;
+        }
+    }
 
     return 0;
 }

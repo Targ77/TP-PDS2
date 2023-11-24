@@ -22,6 +22,18 @@ public:
         return titulo;
     }
 
+    bool alugaFilme(){
+        if(quantidadeDisponivel > 0){
+            quantidadeDisponivel--;
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    void devolverFilme(){
+        quantidadeDisponivel++;
+    }
 };
 
 #endif

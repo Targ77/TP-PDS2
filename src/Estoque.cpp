@@ -108,13 +108,31 @@ void Estoque::lerArquivoCadastro(const std::string& nomeArquivo) {
 
 }
 
-bool Estoque::validaProduto(int codigo){
+bool Estoque::validaProdutoLocacao(int codigo){
     auto it = produtos.find(codigo);
 
     if (it != produtos.end()) {
-        return true;
+        return true;    
     } else {
-        std::cout << "Produto com codigo " << codigo << " não encontrado." << std::endl;
+        std::cout << "Produto com codigo " << codigo << " nao encontrado." << std::endl;
         return false;
     }
+}
+
+bool Estoque::alugaProduto(int codigo){
+
+    auto it = produtos.find(codigo);
+
+    if(it->second->alugaFilme()){
+        return true;    
+    }else{
+        std::cout << "Produto com codigo " << codigo << " sem estoque." << std::endl;
+    }
+}
+
+double Estoque::devolveLocacao(int codigo, int dias){
+    auto it = produtos.find(codigo);
+    it->second->devolverFilme();
+    return it->second->calcularPreco(dias);
+    
 }
