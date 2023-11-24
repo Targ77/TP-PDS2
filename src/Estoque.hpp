@@ -17,5 +17,6 @@ public:
     void imprimirRelatorio() const;
     int quantidadeTitulo(const std::string& titulo);
     void lerArquivoCadastro(const std::string& nomeArquivo);
+    bool validaProduto(int codigo);
 };
 #endif

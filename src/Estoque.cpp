@@ -107,3 +107,14 @@ void Estoque::lerArquivoCadastro(const std::string& nomeArquivo) {
     arquivo.close();
 
 }
+
+bool Estoque::validaProduto(int codigo){
+    auto it = produtos.find(codigo);
+
+    if (it != produtos.end()) {
+        return true;
+    } else {
+        std::cout << "Produto com codigo " << codigo << " não encontrado." << std::endl;
+        return false;
+    }
+}
