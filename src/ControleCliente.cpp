@@ -1,13 +1,13 @@
 #include "ControleCliente.hpp"
 #include <iostream>
 
-void ControleCliente::adicionarCliente(Cliente* cliente) {
+void ControleCliente::adicionarCliente(const std::string& cpf, const std::string& nome) {
     
-    if (clientes.find(cliente->getCpf()) == clientes.end()) {
-        clientes[cliente->getCpf()] = cliente;
+    if (clientes.find(cpf) == clientes.end()) {
+        clientes[cpf] = new Cliente(cpf, nome);
         std::cout << "Cliente adicionado com sucesso." << std::endl;
     } else {
-        std::cout << "Cliente com CPF " << cliente->getCpf() << " já existe." << std::endl;
+        std::cout << "Cliente com CPF " << cpf << " já existe." << std::endl;
     }
 }
 
@@ -23,6 +23,8 @@ void ControleCliente::removerCliente(const std::string& cpf) {
 }
 
 void ControleCliente::imprimirRelatorio() const {
+    std::cout << std::endl;
+    std::cout << "Relatorio de Clientes:" << std::endl;
     for (const auto& pair : clientes) {
         pair.second->imprimirInformacoes();
         std::cout << "------------------------\n";
@@ -37,4 +39,35 @@ Cliente* ControleCliente::encontrarCliente(const std::string& cpf) {
     }
 
     return nullptr;
+}
+
+void ControleCliente::alugarFilme(const std::string& cpf, int codigo){
+    auto it = clientes.find(cpf);
+
+    if (it != clientes.end()) {
+        it->second->addFilme(codigo);
+    } else {
+        std::cout << "Cliente com CPF " << cpf << " não encontrado." << std::endl;
+    }
+}
+
+void ControleCliente::devolverFilmes(const std::string& cpf){
+    auto it = clientes.find(cpf);
+
+    if (it != clientes.end()) {
+        it->second->devolverFilmes();
+    } else {
+        std::cout << "Cliente com CPF " << cpf << " não encontrado." << std::endl;
+    }
+}
+
+bool ControleCliente::validaCliente(const std::string& cpf){
+    auto it = clientes.find(cpf);
+
+    if (it != clientes.end()) {
+        return true;
+    } else {
+        std::cout << "Cliente com CPF " << cpf << " não encontrado." << std::endl;
+        return false;
+    }
 }

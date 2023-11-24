@@ -1,5 +1,10 @@
-#include "Cliente.hpp"
 #include <iostream>
+#include "Cliente.hpp"
+
+Cliente::Cliente(const std::string& cpf, const std::string& nome){
+    this->cpf = cpf;
+    this->nome = nome;
+}
 
 void Cliente::imprimirInformacoes() const {
     std::cout << "Nome: " << nome << std::endl;

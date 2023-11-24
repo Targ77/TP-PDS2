@@ -1,5 +1,5 @@
-#ifndef DVD_HPP
-#define DVD_HPP
+#ifndef CLIENTE_HPP
+#define CLIENTE_HPP
 
 #include "string"
 #include <vector>
@@ -11,6 +11,7 @@ private:
     std::vector<int> filmesAlugados;
 
 public:
+    Cliente(const std::string& cpf, const std::string& nome);
     void imprimirInformacoes() const;
     std::string getCpf();
     std::string getNome();
