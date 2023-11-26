@@ -92,7 +92,7 @@ int main() {
             if (opcao == 'C') {
                 locadora.listarProdutosOrdenadosPorCodigo();
             } else if (opcao == 'T') {
-                locadora.listarProdutosOrdenadosPorTitulo();//Falta Implementar
+                locadora.listarProdutosOrdenadosPorTitulo();
             } else {
                 std::cerr << "ERRO: Tipo de listagem inválido." << std::endl;
             }
@@ -116,7 +116,7 @@ int main() {
             if (opcao == 'C') {
                 locadora.listarClientesOrdenadosPorCpf();
             } else if (opcao == 'T') {
-                locadora.listarClientesOrdenadosPorNome();//Falta Implementar
+                locadora.listarClientesOrdenadosPorNome();
             } else {
                 std::cerr << "ERRO: Tipo de listagem inválido." << std::endl;
             }
