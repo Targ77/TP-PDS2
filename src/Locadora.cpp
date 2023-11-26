@@ -24,7 +24,7 @@ void Locadora::listarProdutosOrdenadosPorCodigo() {
 }
 
 void Locadora::listarProdutosOrdenadosPorTitulo() {
-
+    this->estoque.imprimirRelatorioOrdenadoPorTitulo();
 }
 
 void Locadora::cadastrarCliente(const std::string& cpf, const std::string& nome) {
@@ -40,7 +40,7 @@ void Locadora::listarClientesOrdenadosPorCpf() {
 }
 
 void Locadora::listarClientesOrdenadosPorNome() {
-    // Implemente a lógica para listar clientes ordenados por nome
+    this->controleCliente.imprimirRelatorioOrdenadoPorNome();
 }
 
 void Locadora::alugarFilme(const std::string& cpf, std::vector<int> filmesAlugados) {
@@ -80,6 +80,6 @@ void Locadora::devolverFilme(const std::string& cpf, int diasLocacao) {
             }
         }
         cliente->devolverFilmes();
-        std::cout << " Valor Total: " << valorTotal << std::endl;
+        std::cout << "Valor Total: " << valorTotal << std::endl;
     }
 }

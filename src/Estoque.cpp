@@ -10,6 +10,7 @@ void Estoque::adicionarFita(int codigo, int quantidade, const std::string& titul
     auto it = produtos.find(codigo);
     if (it == produtos.end()) {
         produtos[codigo] = new Fita(codigo, quantidade, titulo);
+        std::cout << "Produto com codigo " << codigo << " cadastrado com sucesso." << std::endl;
     } else{
         std::cout << "Produto com codigo " << codigo << " já existe." << std::endl;
     }
@@ -20,6 +21,7 @@ void Estoque::adicionarDVD(int codigo, int quantidade, const std::string& titulo
     auto it = produtos.find(codigo);
     if (it == produtos.end()) {
         produtos[codigo] = new DVD(codigo, quantidade, titulo, categoria);
+        std::cout << "Produto com codigo " << codigo << " cadastrado com sucesso." << std::endl;
     } else{
         std::cout << "Produto com codigo " << codigo << " já existe." << std::endl;
     }
@@ -127,6 +129,7 @@ bool Estoque::alugaProduto(int codigo){
         return true;    
     }else{
         std::cout << "Produto com codigo " << codigo << " sem estoque." << std::endl;
+        return false;
     }
 }
 
@@ -135,4 +138,23 @@ double Estoque::devolveLocacao(int codigo, int dias){
     it->second->devolverFilme();
     return it->second->calcularPreco(dias);
     
+}
+
+void Estoque::imprimirRelatorioOrdenadoPorTitulo() const {
+    std::map<std::string, Produto*> produtosPorTitulo;
+    if(!this->produtos.empty()){
+        std::cout << "Relatorio de estoque:" << std::endl;
+        std::cout << std::endl;
+
+        for (auto pair : produtos) {
+            produtosPorTitulo[pair.second->getTitulo()] = pair.second;
+        }
+
+        for (auto pair : produtosPorTitulo) {
+           pair.second->imprimir();
+        }
+
+    }else{
+        std::cout << "Estoque Vazio!!" << std::endl;
+    }
 }

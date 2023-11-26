@@ -16,6 +16,7 @@ public:
     void alugarFilme(const std::string& cpf, int codigo);
     void devolverFilmes(const std::string& cpf);
     bool validaCliente(const std::string& cpf);
+    void imprimirRelatorioOrdenadoPorNome() const;
 };
 
 #endif

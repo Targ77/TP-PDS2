@@ -23,11 +23,19 @@ void ControleCliente::removerCliente(const std::string& cpf) {
 }
 
 void ControleCliente::imprimirRelatorio() const {
-    std::cout << std::endl;
-    std::cout << "Relatorio de Clientes:" << std::endl;
-    for (const auto& pair : clientes) {
-        pair.second->imprimirInformacoes();
-        std::cout << "------------------------\n";
+
+    if(!this->clientes.empty()){
+        std::cout << "Relatorio de Clientes:" << std::endl;
+        std::cout << std::endl;
+
+        for (const auto& pair : clientes) {
+
+            pair.second->imprimirInformacoes();
+            std::cout << "------------------------\n";
+        }
+
+    }else{
+        std::cout << "Nenhum Cliente Cadastrado!!" << std::endl;
     }
 }
 
@@ -71,3 +79,27 @@ bool ControleCliente::validaCliente(const std::string& cpf){
         return false;
     }
 }
+
+void ControleCliente::imprimirRelatorioOrdenadoPorNome() const {
+    std::map<std::string, Cliente*> clientesPorNome;
+
+    if(!this->clientes.empty()){
+        std::cout << "Relatorio de Clientes:" << std::endl;
+        std::cout << std::endl;
+
+        for (auto pair : clientesPorNome) {
+            clientesPorNome[pair.second->getNome()] = pair.second;
+        }
+
+        for (const auto& pair : clientesPorNome) {
+
+            pair.second->imprimirInformacoes();
+            std::cout << "------------------------\n";
+        }
+
+    }else{
+        std::cout << "Nenhum Cliente Cadastrado!!" << std::endl;
+    }
+}
+
+

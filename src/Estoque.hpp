@@ -20,5 +20,6 @@ public:
     bool validaProdutoLocacao(int codigo);
     double devolveLocacao(int codigo, int dias);
     bool alugaProduto(int codigo);
+    void imprimirRelatorioOrdenadoPorTitulo() const;
 };
 #endif
