@@ -122,12 +122,12 @@ int main() {
         if (operacao == "LA") {
             std::string nomeArquivo;
             iss >> nomeArquivo;
-            // Lógica para Ler Arquivo de Cadastro
             locadora.lerArquivoCadastro(nomeArquivo);
 
         } else if (operacao == "CF") {
             char tipo;
             int quantidade, codigo;
+
             std::string titulo, categoria, qtd_string, codigo_string;
             // Lógica para Cadastrar Filme
             iss >> tipo;
@@ -153,16 +153,17 @@ int main() {
                     std::cerr << "ERRO: Tipo de filme invalido." << std::endl;
                 }
 
+
         } else if (operacao == "RF") {
             int codigo;
             iss >> codigo;
-            // Lógica para Remover Filme
+
             locadora.removerProduto(codigo);
 
         } else if (operacao == "LF") {
             char opcao;
             iss >> opcao;
-            // Lógica para Listar Filmes
+
             if (opcao == 'C') {
                 locadora.listarProdutosOrdenadosPorCodigo();
             } else if (opcao == 'T') {
@@ -174,21 +175,23 @@ int main() {
         } else if (operacao == "CC") {
             std::string cpf, nome;
             iss >> cpf >> nome;
+
             // Lógica para Cadastrar Cliente
             if(erroCC(cpf)){
                 locadora.cadastrarCliente(cpf, nome);
             }
 
+
         } else if (operacao == "RC") {
             std::string cpf;
             iss >> cpf;
-            // Lógica para Remover Cliente
+
             locadora.removerCliente(cpf);
 
         } else if (operacao == "LC") {
             char opcao;
             iss >> opcao;
-            // Lógica para Listar Clientes
+
             if (opcao == 'C') {
                 locadora.listarClientesOrdenadosPorCpf();
             } else if (opcao == 'N') {
@@ -207,7 +210,6 @@ int main() {
                 codigosProdutos.push_back(codigoProduto);
             }
 
-            // Lógica para Aluguel de Filme
             locadora.alugarFilme(cpf, codigosProdutos);
 
         } else if (operacao == "DV") {
