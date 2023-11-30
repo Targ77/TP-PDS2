@@ -1,6 +1,7 @@
 #ifndef DVD_HPP
 #define DVD_HPP
 
+#include <iostream>
 #include "Produto.hpp"
 #include "string"
 

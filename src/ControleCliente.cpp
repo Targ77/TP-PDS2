@@ -15,8 +15,14 @@ void ControleCliente::removerCliente(const std::string& cpf) {
     auto it = clientes.find(cpf);
 
     if (it != clientes.end()) {
-        clientes.erase(it);
-        std::cout << "Cliente com CPF " << cpf << " removido com sucesso." << std::endl;
+
+        if(it->second->getFilmes().empty()){
+            clientes.erase(it);
+            std::cout << "Cliente com CPF " << cpf << " removido com sucesso." << std::endl;
+        }else{
+            std::cout << "Cliente com CPF " << cpf << " nao pode ser removido pois ainda tem filmes alugados." << std::endl;
+        }
+        
     } else {
         std::cout << "Cliente com CPF " << cpf << " não encontrado." << std::endl;
     }
@@ -87,7 +93,7 @@ void ControleCliente::imprimirRelatorioOrdenadoPorNome() const {
         std::cout << "Relatorio de Clientes:" << std::endl;
         std::cout << std::endl;
 
-        for (auto pair : clientesPorNome) {
+        for (auto pair : clientes) {
             clientesPorNome[pair.second->getNome()] = pair.second;
         }
 
@@ -100,6 +106,27 @@ void ControleCliente::imprimirRelatorioOrdenadoPorNome() const {
     }else{
         std::cout << "Nenhum Cliente Cadastrado!!" << std::endl;
     }
+}
+
+bool ControleCliente::estaAlugado(int codigo){
+
+    if(!this->clientes.empty()){
+
+        for (auto pair : this->clientes) {
+
+            if(!pair.second->getFilmes().empty()){
+                for (int filme : pair.second->getFilmes()) {
+                    if(filme == codigo){
+                        return false;
+                    }
+                }
+            }
+        }
+
+    }
+
+    return true;
+
 }
 
 

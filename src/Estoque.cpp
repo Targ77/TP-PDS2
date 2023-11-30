@@ -12,7 +12,7 @@ void Estoque::adicionarFita(int codigo, int quantidade, const std::string& titul
         produtos[codigo] = new Fita(codigo, quantidade, titulo);
         std::cout << "Produto com codigo " << codigo << " cadastrado com sucesso." << std::endl;
     } else{
-        std::cout << "Produto com codigo " << codigo << " já existe." << std::endl;
+        std::cout << "Produto com codigo " << codigo << " ja existe." << std::endl;
     }
 }
 
@@ -23,7 +23,7 @@ void Estoque::adicionarDVD(int codigo, int quantidade, const std::string& titulo
         produtos[codigo] = new DVD(codigo, quantidade, titulo, categoria);
         std::cout << "Produto com codigo " << codigo << " cadastrado com sucesso." << std::endl;
     } else{
-        std::cout << "Produto com codigo " << codigo << " já existe." << std::endl;
+        std::cout << "Produto com codigo " << codigo << " ja existe." << std::endl;
     }
 }
 
@@ -34,7 +34,7 @@ void Estoque::removerProduto(int codigo) {
         produtos.erase(it);
         std::cout << "Produto com codigo " << codigo << " removido com sucesso." << std::endl;
     } else {
-        std::cout << "Produto com codigo " << codigo << " não encontrado." << std::endl;
+        std::cout << "Produto com codigo " << codigo << " nao encontrado." << std::endl;
     }
 }
 
@@ -121,16 +121,20 @@ bool Estoque::validaProdutoLocacao(int codigo){
     }
 }
 
-bool Estoque::alugaProduto(int codigo){
-
+bool Estoque::validaProdutoEstoque(int codigo){
     auto it = produtos.find(codigo);
 
-    if(it->second->alugaFilme()){
+    if (it != produtos.end() && it->second->validaEstoque()) {
         return true;    
-    }else{
+    } else {
         std::cout << "Produto com codigo " << codigo << " sem estoque." << std::endl;
         return false;
     }
+}
+
+void Estoque::alugaProduto(int codigo){
+    auto it = produtos.find(codigo);
+    it->second->alugaFilme();
 }
 
 double Estoque::devolveLocacao(int codigo, int dias){
@@ -157,4 +161,28 @@ void Estoque::imprimirRelatorioOrdenadoPorTitulo() const {
     }else{
         std::cout << "Estoque Vazio!!" << std::endl;
     }
+}
+
+void Estoque::aumentarEstoque(int codigo, int qtd) {
+
+    auto it = produtos.find(codigo);
+    if (it == produtos.end()) {
+        std::cout << "Produto com codigo " << codigo << " inexistente." << std::endl;
+    }
+    else {
+        it->second->aumentarEstoque(qtd);
+    }
+
+}
+
+void Estoque::diminuirEstoque(int codigo, int qtd) {
+
+    auto it = produtos.find(codigo);
+    if (it == produtos.end()) {
+        std::cout << "Produto com codigo " << codigo << " inexistente." << std::endl;
+    }
+    else {
+        it->second->diminuirEstoque(qtd);
+    }
+
 }

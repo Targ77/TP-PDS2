@@ -1,6 +1,7 @@
 #ifndef LOCADORA_HPP
 #define LOCADORA_HPP
 
+#include <iostream>
 #include "Estoque.hpp"
 #include "ControleCliente.hpp"
 
@@ -22,6 +23,8 @@ public:
     void listarClientesOrdenadosPorNome();//Falta implementar
     void alugarFilme(const std::string& cpf, std::vector<int> filmesAlugados);
     void devolverFilme(const std::string& cpf, int diasLocacao);
+    void aumentarEstoque(int codigo, int qtd);
+    void diminuirEstoque(int codigo, int qtd);
 };
 
 #endif

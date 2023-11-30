@@ -1,8 +1,10 @@
 #ifndef FITA_HPP
 #define FITA_HPP
 
+#include <iostream>
 #include "Produto.hpp"
 #include "string"
+
 
 class Fita : public Produto {
 public:
