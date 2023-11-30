@@ -1,30 +1,30 @@
 <h1>Locadora</h1>
 
-<h2>Descrição</h2>
+<h1>Descrição</h1>
 
 Aplicação em C++ que visa simular as operações de uma locadora de filmes. 
 Nele é possível gerenciar catálogo de filmes multi-mídia, controlar estoque, alugar filmes, cadastrar clientes, gerenciar locações, controle de aluguéis e gerenciar pagamentos.
 
-<h2>Pré-requisitos</h2>
+<h1>Pré-requisitos</h1>
 
 C++11
 
-<h2>Instalação</h2>
+<h1>Instalação</h1>
 
 
 Não é necessário a instalação de nenhum software externo, apenas executar o arquivo .exe.
 
-<h2>Código-fonte</h2>
+<h1>Código-fonte</h1>
 
 Github: https://github.com/Targ77/TP-PDS2
 
-<h2>Licença</h2>
+<h1>Licença</h1>
 
 Não é necessária nenhuma licença externa para executar a aplicação
 
-<h2>Documentação das funções atribuídas a esse código, separada por classes</h2>
+<h1>Documentação das funções atribuídas a esse código, separada por classes</h1>
 
-<h2>Produto</h2>
+<h1>Produto</h1>
 
 ~Produto()
 
@@ -54,7 +54,7 @@ diminuirEstoque(int qtd)
 
 - Diminuí o estoque no tamanho declarado em qtd, caso seja possível
 
-<h2>Fita</h2>
+<h1>Fita</h1>
 
 Fita(int codigo, int quantidade, const std::string&titulo)
 
@@ -73,7 +73,7 @@ getCodigo()
 
 - Retorna o código da fita
 
-<h2>DVD</h2>
+<h1>DVD</h1>
 
 DVD(int codigo, int quantidade, const std::string&titulo, const std::string& categoria)
 
@@ -96,7 +96,7 @@ getCategoria(const std::string& categoria)
 
 - Retorna a categoria do filme.
 
-<h2>Cliente</h2>
+<h1>Cliente</h1>
 
 Cliente(const std::string&cpf, const std::string& nome)
 
@@ -127,7 +127,7 @@ devolverFilmes()
 
 - Devolve todos os filmes alugados à locadora
 
-<h2>Estoque</h2>
+<h1>Estoque</h1>
 
 adicionarFita(int codigo, int quantidade, const std::string&titulo)
 
@@ -185,7 +185,7 @@ diminuirEstoque(int codigo, int qtd)
 
 - diminui o estoque do filme(codigo) no valor declarado(qtd), caso seja possível
 
-<h2>ControleCliente</h2>
+<h1>ControleCliente</h1>
 
 adicionarCliente(const std::string& cpf, const std::string& nome)
 
@@ -223,7 +223,7 @@ imprimirRelatorioOrdenadoPorNome()
 
 - Imprime a lista de clientes cadastrado
 
-<h2>Locadora</h2>
+<h1>Locadora</h1>
 
 lerArquivoCadastro(cont std::string& nomearquivo)
 
