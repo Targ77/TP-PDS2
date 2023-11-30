@@ -4,6 +4,7 @@
 #include <map>
 #include "Produto.hpp"
 #include <memory>
+#include <iostream>
 
 class Estoque {
 private:
@@ -15,12 +16,13 @@ public:
     void removerProduto(int codigo);
     Produto* buscarProduto(int codigo);
     void imprimirRelatorio() const;
-    int quantidadeTitulo(const std::string& titulo);
     void lerArquivoCadastro(const std::string& nomeArquivo);
     bool validaProdutoLocacao(int codigo);
     bool validaProdutoEstoque(int codigo);
     double devolveLocacao(int codigo, int dias);
     void alugaProduto(int codigo);
     void imprimirRelatorioOrdenadoPorTitulo() const;
+    void aumentarEstoque(int codigo, int qtd);
+    void diminuirEstoque(int codigo, int qtd);
 };
 #endif

@@ -1,6 +1,7 @@
 #ifndef PRODUTO_HPP
 #define PRODUTO_HPP
 
+#include <iostream>
 #include "string"
 #include <stdbool.h>
 
@@ -22,10 +23,6 @@ public:
         return titulo;
     }
 
-    void alugaFilme(){
-        quantidadeDisponivel--;
-    }
-
     bool validaEstoque(){
         if(quantidadeDisponivel > 0){
             return true;
@@ -34,8 +31,35 @@ public:
         }
     }
 
+    void alugaFilme(){
+        quantidadeDisponivel--;
+    }
+
     void devolverFilme(){
         quantidadeDisponivel++;
+    }
+
+    void aumentarEstoque(int qtd) {
+        std::cout << "Novo estoque foi de: " << this->quantidadeEstoque << ", sendo " << this->quantidadeDisponivel << " disponiveis" << std::endl;
+        this->quantidadeDisponivel += qtd;
+        this->quantidadeEstoque += qtd;
+        std::cout << "Para: " << this->quantidadeEstoque << ", sendo " << this->quantidadeDisponivel << " disponiveis" << std::endl;
+    }
+
+    void diminuirEstoque(int qtd) {
+
+        if (qtd > this->quantidadeEstoque) {
+            std::cout << "Nao e possivel retirar mais produtos do que temos" << std::endl;
+        }
+        else if (qtd > this->quantidadeDisponivel) {
+            std::cout << "Produto alugado, nao e possivel diminuir o estoque" << std::endl;
+        }
+        else {
+            std::cout << "Novo estoque foi de: " << this->quantidadeEstoque << ", sendo " << this->quantidadeDisponivel << " disponiveis" << std::endl;
+            this->quantidadeDisponivel -= qtd;
+            this->quantidadeEstoque -= qtd;
+            std::cout << "Para: " << this->quantidadeEstoque << ", sendo " << this->quantidadeDisponivel << " disponiveis" << std::endl;
+        }
     }
 };
 

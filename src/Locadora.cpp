@@ -70,7 +70,7 @@ void Locadora::alugarFilme(const std::string& cpf, std::vector<int> filmesAlugad
         }
         std::cout << std::endl;
     }else{
-        std::cout << "Todos Produtos alugados. " << std::endl;
+        std::cout << "Todos produtos alugados. " << std::endl;
     }
 
 }
@@ -88,4 +88,13 @@ void Locadora::devolverFilme(const std::string& cpf, int diasLocacao) {
         cliente->devolverFilmes();
         std::cout << "Valor Total: " << valorTotal << std::endl;
     }
+}
+
+void Locadora::aumentarEstoque(int codigo, int qtd) {
+    this->estoque.aumentarEstoque(codigo, qtd);
+
+}
+void Locadora::diminuirEstoque(int codigo, int qtd) {
+    this->estoque.diminuirEstoque(codigo, qtd);
+
 }
