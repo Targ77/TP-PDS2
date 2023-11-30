@@ -61,14 +61,13 @@ int main() {
         if (operacao == "LA") {
             std::string nomeArquivo;
             iss >> nomeArquivo;
-            // Lógica para Ler Arquivo de Cadastro
             locadora.lerArquivoCadastro(nomeArquivo);
 
         } else if (operacao == "CF") {
             char tipo;
             int quantidade, codigo;
             std::string titulo, categoria;
-            // Lógica para Cadastrar Filme
+
             iss >> tipo >> quantidade >> codigo >> titulo;
             if (tipo == 'D') {
                 iss >> categoria;
@@ -82,13 +81,13 @@ int main() {
         } else if (operacao == "RF") {
             int codigo;
             iss >> codigo;
-            // Lógica para Remover Filme
+
             locadora.removerProduto(codigo);
 
         } else if (operacao == "LF") {
             char opcao;
             iss >> opcao;
-            // Lógica para Listar Filmes
+
             if (opcao == 'C') {
                 locadora.listarProdutosOrdenadosPorCodigo();
             } else if (opcao == 'T') {
@@ -100,22 +99,22 @@ int main() {
         } else if (operacao == "CC") {
             std::string cpf, nome;
             iss >> cpf >> nome;
-            // Lógica para Cadastrar Cliente
+
             locadora.cadastrarCliente(cpf, nome);
 
         } else if (operacao == "RC") {
             std::string cpf;
             iss >> cpf;
-            // Lógica para Remover Cliente
+
             locadora.removerCliente(cpf);
 
         } else if (operacao == "LC") {
             char opcao;
             iss >> opcao;
-            // Lógica para Listar Clientes
+
             if (opcao == 'C') {
                 locadora.listarClientesOrdenadosPorCpf();
-            } else if (opcao == 'T') {
+            } else if (opcao == 'N') {
                 locadora.listarClientesOrdenadosPorNome();
             } else {
                 std::cerr << "ERRO: Tipo de listagem inválido." << std::endl;
@@ -131,7 +130,6 @@ int main() {
                 codigosProdutos.push_back(codigoProduto);
             }
 
-            // Lógica para Aluguel de Filme
             locadora.alugarFilme(cpf, codigosProdutos);
 
         } else if (operacao == "DV") {

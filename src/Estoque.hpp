@@ -18,8 +18,9 @@ public:
     int quantidadeTitulo(const std::string& titulo);
     void lerArquivoCadastro(const std::string& nomeArquivo);
     bool validaProdutoLocacao(int codigo);
+    bool validaProdutoEstoque(int codigo);
     double devolveLocacao(int codigo, int dias);
-    bool alugaProduto(int codigo);
+    void alugaProduto(int codigo);
     void imprimirRelatorioOrdenadoPorTitulo() const;
 };
 #endif

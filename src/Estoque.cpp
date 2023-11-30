@@ -121,16 +121,20 @@ bool Estoque::validaProdutoLocacao(int codigo){
     }
 }
 
-bool Estoque::alugaProduto(int codigo){
-
+bool Estoque::validaProdutoEstoque(int codigo){
     auto it = produtos.find(codigo);
 
-    if(it->second->alugaFilme()){
+    if (it != produtos.end() && it->second->validaEstoque()) {
         return true;    
-    }else{
+    } else {
         std::cout << "Produto com codigo " << codigo << " sem estoque." << std::endl;
         return false;
     }
+}
+
+void Estoque::alugaProduto(int codigo){
+    auto it = produtos.find(codigo);
+    it->second->alugaFilme();
 }
 
 double Estoque::devolveLocacao(int codigo, int dias){

@@ -16,7 +16,12 @@ void Locadora::cadastrarFita(int codigo, int quantidade, const std::string& titu
 
 void Locadora::removerProduto(int codigo) {
     
-    this->estoque.removerProduto(codigo);
+    if(controleCliente.estaAlugado(codigo)){
+        this->estoque.removerProduto(codigo);
+    }else{
+        std::cout << "Produto com codigo "<< codigo << " nao pode ser excluido, item ainda esta alugado." << std::endl;
+    }
+
 }
 
 void Locadora::listarProdutosOrdenadosPorCodigo() {
@@ -44,22 +49,23 @@ void Locadora::listarClientesOrdenadosPorNome() {
 }
 
 void Locadora::alugarFilme(const std::string& cpf, std::vector<int> filmesAlugados) {
-    std::vector<int> filmesIndeisponiveis;
+    std::vector<int> filmesIndisponiveis;
 
     if(controleCliente.validaCliente(cpf)){
 
         for (int filme : filmesAlugados) {
-            if(estoque.validaProdutoLocacao(filme)){
+            if(estoque.validaProdutoLocacao(filme) && estoque.validaProdutoEstoque(filme)){
                 controleCliente.alugarFilme(cpf, filme);
                 estoque.alugaProduto(filme);
             }else{
-                filmesIndeisponiveis.push_back(filme);
+                filmesIndisponiveis.push_back(filme);
             }
         }
     }
-    if(!filmesIndeisponiveis.empty()){
+    
+    if(!filmesIndisponiveis.empty()){
         std::cout << "Produtos indisponiveis: ";
-        for (int filme : filmesIndeisponiveis) {
+        for (int filme : filmesIndisponiveis) {
             std::cout << filme << " ";
         }
         std::cout << std::endl;

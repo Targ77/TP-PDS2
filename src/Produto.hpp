@@ -22,9 +22,12 @@ public:
         return titulo;
     }
 
-    bool alugaFilme(){
+    void alugaFilme(){
+        quantidadeDisponivel--;
+    }
+
+    bool validaEstoque(){
         if(quantidadeDisponivel > 0){
-            quantidadeDisponivel--;
             return true;
         }else{
             return false;
