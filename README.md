@@ -11,7 +11,6 @@ C++11
 
 <h1>Instalação</h1>
 
-
 Não é necessário a instalação de nenhum software externo, apenas executar o arquivo .exe.
 
 <h1>Código-fonte</h1>
@@ -32,11 +31,11 @@ Não é necessária nenhuma licença externa para executar a aplicação
 
 getTitulo()
 
-- Retorna titulo do filme
+- Retorna titulo do filme (std::string)
 
 validaEstoque()
 
-- Verifica se o estoque é maior que 0
+- Retorna se o estoque é maior que 0. (True ou False)
 
 alugaFilme()
 
@@ -63,7 +62,7 @@ Fita(int codigo, int quantidade, const std::string&titulo)
 
 calcularPreco(int diasLocacao)
 
-- Calcula o preço baseado na multiplicação do preço base vezes os dias que a fita foi alugada(diasLocacao), mais um taxa caso a fita não seja rebobinada
+- Retorna o preço a ser pago baseado na multiplicação do preço base vezes os dias que a fita foi alugada(diasLocacao), mais um taxa caso a fita não seja rebobinada (double)
 
 imprimir()
 
@@ -71,7 +70,7 @@ imprimir()
 
 getCodigo()
 
-- Retorna o código da fita
+- Retorna o código da fita (int)
 
 <h1>DVD</h1>
 
@@ -82,7 +81,7 @@ DVD(int codigo, int quantidade, const std::string&titulo, const std::string& cat
 
 calcularPreco(int diasLocacao)
 
-- Calcula o preço baseado na multiplicação do preço base vezes os dias que a fita foi alugada(diasLocacao).
+- Retorna o preço a ser pago baseado na multiplicação do preço base vezes os dias que a fita foi alugada(diasLocacao). (double)
 
 imprimir()
 
@@ -90,11 +89,15 @@ imprimir()
 
 getCodigo()
 
-- Retorna o código da fita
+- Retorna o código da fita (int)
 
 getCategoria(const std::string& categoria)
 
-- Retorna a categoria do filme.
+- Retorna a categoria do filme (DVD::Categoria)
+
+validaCategoria()
+
+- Verifica a validade da Categoria selecionada (True ou False)
 
 <h1>Cliente</h1>
 
@@ -109,15 +112,15 @@ imprimirInformacoes()
 
 getCPF()
 
-- Retorna o CPF
+- Retorna o CPF (std::string)
 
 getNome()
 
-- Retorna o nome
+- Retorna o nome (std::string)
 
 getFilmes()
 
-- Retorna um vetor de inteiros com os códigos dos filmes alugados
+- Retorna um vetor de inteiros com os códigos dos filmes alugados (vector<int>)
 
 addFilme(int filme)
 
@@ -147,7 +150,7 @@ removerProduto(int codigo)
 
 buscarProduto(int codigo)
 
-- Retorna um ponteiro do produto com o código(codigo) presente no mapa
+- Retorna um ponteiro do produto com o código(codigo) presente no mapa (Produto*)
 
 imprimirRelatorio()
 
@@ -159,11 +162,11 @@ lerArquivoCadastro(const std::string& nomeArquivo)
 
 validaProdutoLocacao(int codigo)
 
-- Verifica se o filme com o código declarado(codigo) realmente existe
+- Verifica se o filme com o código declarado(codigo) realmente existe (True ou False)
 
 validaProdutoEstoque(int codigo)
 
-- Verifica se o filme com o código declarado(codigo) está disponível no estoque
+- Verifica se o filme com o código declarado(codigo) está disponível no estoque (True ou False)
 
 devolveLocacao(int codigo, int dias)
 
@@ -201,7 +204,7 @@ imprimirRelatorio()
 
 encontrarCliente(const std::string& cpf)
 
-- Retorna um ponteiro do cliente requerido(cpf)
+- Retorna um ponteiro do cliente requerido(cpf) (Cliente*)
 
 alugarFilme(const std::string& cpf, int codigo)
 
@@ -213,11 +216,11 @@ devolverFilmes(cosnt std::string& cpf)
 
 validaCliente(cosnt std::string&cpf)
 
-- Verifica se o cliente(cpf) está cadastrado
+- Verifica se o cliente(cpf) está cadastrado (True ou False)
 
 estaAlugado(int codigo)
 
-- Verifica se o filme declarado(codigo) está alugado
+- Verifica se o filme declarado(codigo) está alugado (True ou False)
 
 imprimirRelatorioOrdenadoPorNome()
 

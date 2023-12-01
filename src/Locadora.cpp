@@ -50,6 +50,7 @@ void Locadora::listarClientesOrdenadosPorNome() {
 
 void Locadora::alugarFilme(const std::string& cpf, std::vector<int> filmesAlugados) {
     std::vector<int> filmesIndisponiveis;
+    int vrf = 0;
 
     if(controleCliente.validaCliente(cpf)){
 
@@ -57,6 +58,7 @@ void Locadora::alugarFilme(const std::string& cpf, std::vector<int> filmesAlugad
             if(estoque.validaProdutoLocacao(filme) && estoque.validaProdutoEstoque(filme)){
                 controleCliente.alugarFilme(cpf, filme);
                 estoque.alugaProduto(filme);
+                vrf = 1;
             }else{
                 filmesIndisponiveis.push_back(filme);
             }
@@ -69,7 +71,7 @@ void Locadora::alugarFilme(const std::string& cpf, std::vector<int> filmesAlugad
             std::cout << filme << " ";
         }
         std::cout << std::endl;
-    }else{
+    }else if (vrf == 1){
         std::cout << "Todos produtos alugados. " << std::endl;
     }
 
@@ -80,13 +82,19 @@ void Locadora::devolverFilme(const std::string& cpf, int diasLocacao) {
     if(controleCliente.validaCliente(cpf)){
         Cliente* cliente = controleCliente.encontrarCliente(cpf);
 
-        for (int filme : cliente->getFilmes()) {
-            if(estoque.validaProdutoLocacao(filme)){
-               valorTotal = valorTotal + estoque.devolveLocacao(filme, diasLocacao);
-            }
+        if(cliente->getFilmes().empty()){
+            std::cout << "Nao ha filmes a serem devolvidos" << std::endl;
+
         }
-        cliente->devolverFilmes();
-        std::cout << "Valor Total: " << valorTotal << std::endl;
+        else{
+            for (int filme : cliente->getFilmes()) {
+                if(estoque.validaProdutoLocacao(filme)){
+                valorTotal = valorTotal + estoque.devolveLocacao(filme, diasLocacao);
+                }
+            }
+            cliente->devolverFilmes();
+            std::cout << "Valor Total: " << valorTotal << std::endl;
+        }
     }
 }
 

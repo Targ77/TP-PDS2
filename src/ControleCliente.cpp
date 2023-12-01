@@ -7,7 +7,7 @@ void ControleCliente::adicionarCliente(const std::string& cpf, const std::string
         clientes[cpf] = new Cliente(cpf, nome);
         std::cout << "Cliente adicionado com sucesso." << std::endl;
     } else {
-        std::cout << "Cliente com CPF " << cpf << " já existe." << std::endl;
+        std::cout << "Cliente com CPF " << cpf << " ja existe." << std::endl;
     }
 }
 
@@ -24,7 +24,7 @@ void ControleCliente::removerCliente(const std::string& cpf) {
         }
         
     } else {
-        std::cout << "Cliente com CPF " << cpf << " não encontrado." << std::endl;
+        std::cout << "Cliente com CPF " << cpf << " nao encontrado." << std::endl;
     }
 }
 
@@ -81,7 +81,7 @@ bool ControleCliente::validaCliente(const std::string& cpf){
     if (it != clientes.end()) {
         return true;
     } else {
-        std::cout << "Cliente com CPF " << cpf << " não encontrado." << std::endl;
+        std::cout << "Cliente com CPF " << cpf << " nao encontrado." << std::endl;
         return false;
     }
 }
