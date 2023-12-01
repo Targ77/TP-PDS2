@@ -19,11 +19,17 @@ void Estoque::adicionarFita(int codigo, int quantidade, const std::string& titul
 void Estoque::adicionarDVD(int codigo, int quantidade, const std::string& titulo, const std::string& categoria) {
 
     auto it = produtos.find(codigo);
-    if (it == produtos.end()) {
-        produtos[codigo] = new DVD(codigo, quantidade, titulo, categoria);
-        std::cout << "Produto com codigo " << codigo << " cadastrado com sucesso." << std::endl;
-    } else{
-        std::cout << "Produto com codigo " << codigo << " ja existe." << std::endl;
+    DVD* dvd = new DVD(codigo, quantidade, titulo, categoria);
+
+    if(dvd->validaCategoria()){
+        if (it == produtos.end()) {
+            produtos[codigo] = dvd;
+            std::cout << "Produto com codigo " << codigo << " cadastrado com sucesso." << std::endl;
+        } else{
+            std::cout << "Produto com codigo " << codigo << " ja existe." << std::endl;
+        }
+    }else{
+        std::cout << "ERRO: Produto com codigo " << codigo << " tem categoria invalida." << std::endl;
     }
 }
 
@@ -83,17 +89,20 @@ void Estoque::lerArquivoCadastro(const std::string& nomeArquivo) {
             int codigo, quantidade;
             std::string titulo, categoria;
 
-            iss >> tipo >> quantidade >> codigo >> titulo;
+            iss >> tipo;
 
             if (tipo == 'F') {
+                iss >> quantidade >> codigo;
+                std::getline(iss >> std::ws, titulo);
 
                 adicionarFita(codigo, quantidade, titulo);
-                std::cout << "Fita " << codigo << " cadastrado com sucesso" << std::endl;
-            }else if (tipo == 'D') {
 
-                iss >> categoria;
+            }else if (tipo == 'D') {
+                iss >> quantidade >> codigo >> categoria;
+                std::getline(iss >> std::ws, titulo);
+
                 adicionarDVD(codigo, quantidade, titulo, categoria);
-                std::cout << "DVD " << codigo << " cadastrado com sucesso" << std::endl;
+
             }else {
                 std::cout << "ERRO: dados incorretos" << std::endl;
             }

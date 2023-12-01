@@ -7,14 +7,15 @@
 
 class DVD : public Produto {
 public:
-    //1, 2, 3
-    enum Categoria { Lancamento, Estoque, Promocao };
+    
+    enum Categoria { Lancamento, Estoque, Promocao, Erro };
 
     DVD(int codigo, int quantidade, const std::string& titulo, const std::string& categoria);
     double calcularPreco(int diasLocacao) const override;
     void imprimir() const override;
     int getCodigo() const override;
     DVD::Categoria getCategoria(const std::string& categoria);
+    bool validaCategoria();
 
 private:
     Categoria categoria;

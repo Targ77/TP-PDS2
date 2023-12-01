@@ -31,6 +31,14 @@ double DVD::calcularPreco(int diasLocacao) const {
     return valor;
 }
 
+bool DVD::validaCategoria(){
+    if(this->categoria == DVD::Erro){
+        return false;
+    }else{
+        return true;
+    }
+}
+
 void DVD::imprimir() const {
     std::cout << "Titulo: " << titulo << std::endl;
     std::cout << "Codigo: " << getCodigo() << ", Quantidade: " << this->quantidadeDisponivel << ", Categoria: ";
@@ -66,6 +74,6 @@ DVD::Categoria DVD::getCategoria(const std::string& categoria) {
         return Categoria::Promocao;
     } else {
 
-        throw std::invalid_argument("Categoria invalida: " + categoria);
+        return Categoria::Erro;
     }
 }

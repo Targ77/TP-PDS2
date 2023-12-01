@@ -18,7 +18,7 @@ void imprimirInstrucoesEntrada() {
     std::cout << "   LA <Nome do Arquivo>" << std::endl;
 
     std::cout << "2. Cadastrar Filme:" << std::endl;
-    std::cout << "   CF <Tipo: F|D> <quantidade> <codigo> <titulo> <categoria no caso de DVD>" << std::endl;
+    std::cout << "   CF <Tipo: F|D> <quantidade> <codigo> <categoria no caso de DVD> <titulo>" << std::endl;
 
     std::cout << "3. Remover Filme:" << std::endl;
     std::cout << "   RF <codigo>" << std::endl;
@@ -132,10 +132,11 @@ int main() {
             // Lógica para Cadastrar Filme
             iss >> tipo;
             iss >> qtd_string >> codigo_string;
-            iss >> titulo;
 
                 if (tipo == 'D') {
                     iss >> categoria;
+                    std::getline(iss >> std::ws, titulo);
+
                     if(erroCQ(qtd_string, codigo_string)){
                         quantidade = stoi(qtd_string);
                         codigo = stoi(codigo_string);
@@ -143,6 +144,7 @@ int main() {
                     }
                 }
                 else if (tipo == 'F') {
+                    std::getline(iss >> std::ws, titulo);
                     if (erroCQ(qtd_string, codigo_string)) {
                         quantidade = stoi(qtd_string);
                         codigo = stoi(codigo_string);
@@ -174,8 +176,9 @@ int main() {
 
         } else if (operacao == "CC") {
             std::string cpf, nome;
-            iss >> cpf >> nome;
-
+            iss >> cpf;
+            std::getline(iss >> std::ws, nome);
+            
             // Lógica para Cadastrar Cliente
             if(erroCC(cpf)){
                 locadora.cadastrarCliente(cpf, nome);
